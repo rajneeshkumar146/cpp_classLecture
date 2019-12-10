@@ -1,4 +1,4 @@
-// #include <bits/stdc++.h>
+#include <bits/stdc++.h>
 #include <iostream>
 #include <algorithm>
 using namespace std;
@@ -46,13 +46,13 @@ void fibboPattern()
 	int row;
 	cin >> row;
 	int nst = 1;
-	int a = 1;
-	int b = 0;
+	int a = 0;
+	int b = 1;
 	while (row-- > 0)
 	{
 		for (int cst = 1; cst <= nst; cst++)
 		{
-			cout << b << " ";
+			cout << a << " ";
 			int sum = b + a;
 			a = b;
 			b = sum;
@@ -294,7 +294,7 @@ void solve()
 	// daimondPattern();
 	// hollowDiamond();
 	// numberDiamond();
-	// bonousQuestion();
+	bonousQuestion();
 	// bonus2();
 }
 

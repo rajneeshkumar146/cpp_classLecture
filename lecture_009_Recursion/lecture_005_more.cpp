@@ -143,6 +143,59 @@ bool sudokuBit(vii &board, int bno, vi &row, vi &col, vii &mat)
     return res;
 }
 
+int sudoku_02(vector<vector<int>> &boxe, vector<pair<int, int>> zeros, int bno)
+{
+    if (bno == zeros.size())
+    {
+        display(boxe);
+        return 1;
+    }
+
+    int count = 0;
+    for (int num = 1; num <= 9; num++)
+    {
+        int r = zeros[bno].first;
+        int c = zeros[bno].second;
+
+        if (isValidToPlaceNumber(boxe, num, r, c))
+        {
+            boxe[r][c] = num;
+            count += sudoku_02(boxe, zeros, bno + 1);
+            boxe[r][c] = 0;
+        }
+    }
+
+    return count;
+}
+
+int sudoku_03(vector<vector<int>> &boxe, vector<pair<int, int>> zeros, int num, int bno)
+{
+    if (bno == zeros.size())
+    {
+        display(boxe);
+        return 1;
+    }
+
+    if (num > 9)
+        return 0;
+
+    int count = 0;
+    int r = zeros[bno].first;
+    int c = zeros[bno].second;
+
+    if (isValidToPlaceNumber(boxe, num, r, c))
+    {
+        boxe[r][c] = num;
+        count += sudoku_03(boxe, zeros, 1, bno + 1);
+        boxe[r][c] = 0;
+    }
+    
+        count += sudoku_03(boxe, zeros, num + 1, bno);
+
+    return count;
+}
+
+
 void sudokuProblem()
 {
     vii board = {{3, 0, 6, 5, 0, 8, 4, 0, 0},
@@ -176,6 +229,23 @@ void sudokuProblem()
     }
 
     sudokuBit(board, 0, row, col, mat);
+
+
+    vector<pair<int, int>> zeros;
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            if (boxe[i][j] == 0)
+            {
+                zeros.push_back({i, j});
+            }
+        }
+    }
+
+    // cout << sudoku_02(boxe, zeros, 0)<<endl;
+    // cout << sudoku_03(boxe, zeros, 1, 0) << endl;
+
 }
 
 //===============================================================================

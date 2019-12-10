@@ -751,7 +751,7 @@ void solve()
 {
     //    simple();
     //   TargetAndEquiSet();
-    // coinChangeVariation();
+    coinChangeVariation();
     // combinationAndPermutation();
     // nQueenProblems();
     // nKnight();
